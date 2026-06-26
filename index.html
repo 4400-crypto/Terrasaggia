@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fattoria Terrassaggia — Eccellenze della Terra</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAVIGATION ═══════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span class="logo-icon">🌿</span>
+    <span class="logo-text">Fattoria <em>Terrassaggia</em></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#hero" onclick="scrollTo('hero')">Home</a></li>
+    <li><a href="#gallery" onclick="scrollTo('gallery')">Galleria</a></li>
+    <li><a href="#about" onclick="scrollTo('about')">Chi Siamo</a></li>
+    <li><a href="#shop" onclick="scrollTo('shop')">Boutique</a></li>
+    <li><a href="#contact" onclick="scrollTo('contact')">Contatti</a></li>
+    <li><a href="#" class="btn-employee" onclick="openEmployeeLogin(event)">🔐 Area Dipendenti</a></li>
+  </ul>
+  <div class="cart-btn" onclick="toggleCart()">
+    <span class="cart-icon">🛒</span>
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero" class="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge reveal-up">— Dal 1887 —</div>
+    <h1 class="hero-title reveal-up">
+      <span>Fattoria</span>
+      <em>Terrassaggia</em>
+    </h1>
+    <p class="hero-subtitle reveal-up">Eccellenze della Terra Italiana</p>
+    <p class="hero-desc reveal-up">Dove la tradizione incontra il lusso. Prodotti esclusivi coltivati con passione nelle nostre terre d'altura, tra profumi di tartufo e distese di ulivi secolari.</p>
+    <div class="hero-btns reveal-up">
+      <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Scopri i Prodotti</button>
+      <button class="btn-secondary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">Vista Aerea</button>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scorri</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ STATS BAR ═══════════════════════════ -->
+<section class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num" data-target="137">0</span>
+    <span class="stat-label">Anni di Storia</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="850">0</span>
+    <span class="stat-label">Ettari Coltivati</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="42">0</span>
+    <span class="stat-label">Prodotti Esclusivi</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="1200">0</span>
+    <span class="stat-label">Clienti nel Mondo</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DRONE GALLERY ═══════════════════════════ -->
+<section id="gallery" class="gallery-section">
+  <div class="section-header reveal-up">
+    <span class="section-tag">Vista dall'Alto</span>
+    <h2>La Nostra Terra<br/><em>dall'Occhio del Drone</em></h2>
+    <p>Immagini esclusive della nostra tenuta riprese dai nostri droni. Scopri la bellezza dei nostri campi, dei boschi di tartufaie e dei filari d'ulivo dall'alto.</p>
+  </div>
+
+  <div class="gallery-slider-wrap">
+    <div class="gallery-slider" id="gallerySlider">
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&q=80" alt="Campi al tramonto" />
+        <div class="slide-caption">
+          <h3>I Campi al Tramonto</h3>
+          <p>Distese infinite baciate dal sole del tardo pomeriggio</p>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1400&q=80" alt="Filari d'ulivo" />
+        <div class="slide-caption">
+          <h3>Gli Ulivi Secolari</h3>
+          <p>Oltre 3.000 ulivi con radici che affondano nella storia</p>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&q=80" alt="Vigneti" />
+        <div class="slide-caption">
+          <h3>I Vigneti della Riserva</h3>
+          <p>Vitigni autoctoni ad altitudine controllata per vini d'eccellenza</p>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1400&q=80" alt="Bosco tartufaie" />
+        <div class="slide-caption">
+          <h3>Le Tartufaie Segrete</h3>
+          <p>Boschi di quercia e nocciolo dove nasce il nostro oro nero</p>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1400&q=80" alt="Vista aerea tenuta" />
+        <div class="slide-caption">
+          <h3>La Tenuta Principale</h3>
+          <p>Il cuore pulsante di Terrassaggia dall'alto dei cieli</p>
+        </div>
+      </div>
+      <div class="gallery-slide">
+        <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=1400&q=80" alt="Lavanda e fiori" />
+        <div class="slide-caption">
+          <h3>I Campi in Fiore</h3>
+          <p>La primavera esplode di colori tra i nostri ettari</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="slider-btn prev" onclick="slideGallery(-1)">&#8249;</button>
+    <button class="slider-btn next" onclick="slideGallery(1)">&#8250;</button>
+
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+
+  <div class="gallery-grid reveal-up">
+    <div class="grid-img grid-img-1">
+      <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800&q=80" alt="Dettaglio campo" />
+      <div class="grid-overlay"><span>Grano Antico</span></div>
+    </div>
+    <div class="grid-img grid-img-2">
+      <img src="https://images.unsplash.com/photo-1505471768190-275e2ad070b0?w=800&q=80" alt="Frutteto" />
+      <div class="grid-overlay"><span>Il Frutteto</span></div>
+    </div>
+    <div class="grid-img grid-img-3">
+      <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80" alt="Bosco" />
+      <div class="grid-overlay"><span>Boschi di Quercia</span></div>
+    </div>
+    <div class="grid-img grid-img-4">
+      <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800&q=80" alt="Mattina presto" />
+      <div class="grid-overlay"><span>L'Alba sui Campi</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section id="about" class="about-section">
+  <div class="about-visual">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=800&q=80" alt="Fondatore" class="about-img-main reveal-left" />
+      <img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=600&q=80" alt="Prodotti" class="about-img-secondary reveal-left" />
+      <div class="about-badge-gold reveal-up">
+        <span>Dal</span>
+        <strong>1887</strong>
+      </div>
+    </div>
+  </div>
+  <div class="about-text reveal-right">
+    <span class="section-tag">La Nostra Storia</span>
+    <h2>Quattro Generazioni<br/><em>di Passione</em></h2>
+    <p class="about-intro">Terrassaggia nasce nel cuore dell'Umbria, fondata nel 1887 dal Barone Enrico Terrassa, con una visione: produrre il meglio che la terra italiana possa offrire, senza compromessi.</p>
+    <p>Oggi, alla quarta generazione, continuiamo la tradizione con lo stesso rispetto per la natura e l'ossessione per la qualità. I nostri 850 ettari abbracciano tartufaie, vigneti, uliveti e boschi di quercia, dove ogni prodotto nasce da un profondo equilibrio tra uomo e terra.</p>
+    <div class="about-features">
+      <div class="feature-item">
+        <span class="feat-icon">🌱</span>
+        <div>
+          <strong>Biologico Certificato</strong>
+          <p>Zero pesticidi, coltivazione naturale dal 1972</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feat-icon">🏆</span>
+        <div>
+          <strong>Premi Internazionali</strong>
+          <p>47 riconoscimenti nelle più prestigiose fiere mondiali</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feat-icon">🚚</span>
+        <div>
+          <strong>Spedizione Mondiale</strong>
+          <p>Consegna refrigerata in 48h in tutta Europa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SHOP ═══════════════════════════ -->
+<section id="shop" class="shop-section">
+  <div class="section-header reveal-up">
+    <span class="section-tag">Boutique Esclusiva</span>
+    <h2>I Nostri<br/><em>Tesori della Terra</em></h2>
+    <p>Ogni prodotto è selezionato, lavorato e confezionato a mano nella nostra tenuta. Qualità senza compromessi, prezzi che riflettono l'eccellenza assoluta.</p>
+  </div>
+
+  <div class="shop-filters reveal-up">
+    <button class="filter-btn active" data-filter="all">Tutti</button>
+    <button class="filter-btn" data-filter="tartufi">Tartufi</button>
+    <button class="filter-btn" data-filter="oli">Oli & Condimenti</button>
+    <button class="filter-btn" data-filter="formaggi">Formaggi & Salumi</button>
+    <button class="filter-btn" data-filter="vini">Vini & Spirits</button>
+    <button class="filter-btn" data-filter="spezie">Spezie & Rarità</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+
+  <div class="shop-cta reveal-up">
+    <p>Cerchi un prodotto non in lista? Contattaci per ordini personalizzati e confezioni regalo su misura.</p>
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contattaci</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CART SIDEBAR ═══════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Il Tuo Ordine</h3>
+    <button onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <span>🌿</span>
+      <p>Il tuo carrello è vuoto</p>
+      <small>Aggiungi i nostri prodotti esclusivi</small>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span>Subtotale:</span>
+      <span id="cartSubtotal">€ 0</span>
+    </div>
+    <div class="cart-total-row">
+      <span>IVA (22%):</span>
+      <span id="cartIva">€ 0</span>
+    </div>
+    <div class="cart-total-row total-final">
+      <span>Totale:</span>
+      <span id="cartTotal">€ 0</span>
+    </div>
+    <button class="btn-primary full-width" onclick="openCheckout()">Procedi all'Ordine</button>
+    <button class="btn-outline full-width" onclick="clearCart()">Svuota Carrello</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHECKOUT MODAL ═══════════════════════════ -->
+<div class="modal-overlay" id="checkoutOverlay" onclick="closeModal('checkoutOverlay')">
+  <div class="modal checkout-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('checkoutOverlay')">✕</button>
+    <div class="modal-header">
+      <h2>🌿 Completa il Tuo Ordine</h2>
+      <p>Inserisci i tuoi dati per finalizzare l'acquisto</p>
+    </div>
+    <form id="checkoutForm" onsubmit="submitOrder(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome *</label>
+          <input type="text" id="orderNome" required placeholder="Il tuo nome" />
+        </div>
+        <div class="form-group">
+          <label>Cognome *</label>
+          <input type="text" id="orderCognome" required placeholder="Il tuo cognome" />
+        </div>
+        <div class="form-group full">
+          <label>Email *</label>
+          <input type="email" id="orderEmail" required placeholder="email@esempio.it" />
+        </div>
+        <div class="form-group">
+          <label>Telefono *</label>
+          <input type="tel" id="orderTel" required placeholder="+39 000 0000000" />
+        </div>
+        <div class="form-group">
+          <label>Azienda</label>
+          <input type="text" id="orderAzienda" placeholder="Nome azienda (opzionale)" />
+        </div>
+        <div class="form-group full">
+          <label>Indirizzo di Spedizione *</label>
+          <input type="text" id="orderIndirizzo" required placeholder="Via, numero civico" />
+        </div>
+        <div class="form-group">
+          <label>Città *</label>
+          <input type="text" id="orderCitta" required placeholder="Città" />
+        </div>
+        <div class="form-group">
+          <label>CAP *</label>
+          <input type="text" id="orderCap" required placeholder="00000" />
+        </div>
+        <div class="form-group full">
+          <label>Note speciali</label>
+          <textarea id="orderNote" rows="3" placeholder="Istruzioni particolari, richieste di confezionamento regalo..."></textarea>
+        </div>
+      </div>
+      <div class="checkout-summary" id="checkoutSummary"></div>
+      <button type="submit" class="btn-primary full-width">✅ Conferma Ordine</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ ORDER SUCCESS ═══════════════════════════ -->
+<div class="modal-overlay" id="successOverlay" onclick="closeModal('successOverlay')">
+  <div class="modal success-modal" onclick="event.stopPropagation()">
+    <div class="success-animation">
+      <div class="success-circle">✓</div>
+    </div>
+    <h2>Ordine Ricevuto!</h2>
+    <p>Grazie per aver scelto Fattoria Terrassaggia. Riceverai una conferma via email entro pochi minuti.</p>
+    <p class="order-id" id="successOrderId"></p>
+    <button class="btn-primary" onclick="closeModal('successOverlay')">Continua lo Shopping</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="section-header reveal-up" style="color:var(--cream)">
+      <span class="section-tag" style="border-color:var(--gold);color:var(--gold)">Contatti</span>
+      <h2 style="color:var(--cream)">Parliamo<br/><em style="color:var(--gold)">Insieme</em></h2>
+      <p style="color:rgba(245,240,232,0.7)">Per ordini personalizzati, confezioni regalo, eventi aziendali e spedizioni internazionali.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="info-card">
+          <span class="info-icon">📍</span>
+          <div>
+            <strong>Sede</strong>
+            <p>Località Terrassaggia, 1<br/>06056 Massa Martana (PG), Umbria</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">📞</span>
+          <div>
+            <strong>Telefono</strong>
+            <p>+39 075 8890 1234<br/>Lun–Sab 8:00–18:00</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">✉️</span>
+          <div>
+            <strong>Email</strong>
+            <p>ordini@terrassaggia.it<br/>info@terrassaggia.it</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🚚</span>
+          <div>
+            <strong>Spedizioni</strong>
+            <p>48h Italia · 72h Europa<br/>Trasporto refrigerato certificato</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <form onsubmit="sendContact(event)">
+          <div class="form-group">
+            <label style="color:var(--cream)">Nome e Cognome</label>
+            <input type="text" class="dark-input" placeholder="Il tuo nome" required />
+          </div>
+          <div class="form-group">
+            <label style="color:var(--cream)">Email</label>
+            <input type="email" class="dark-input" placeholder="email@esempio.it" required />
+          </div>
+          <div class="form-group">
+            <label style="color:var(--cream)">Messaggio</label>
+            <textarea class="dark-input" rows="5" placeholder="Come possiamo aiutarti?" required></textarea>
+          </div>
+          <button type="submit" class="btn-gold full-width">Invia Messaggio ✉️</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-icon">🌿</span>
+      <span class="logo-text">Fattoria <em>Terrassaggia</em></span>
+      <p>Eccellenze della Terra Italiana dal 1887</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Esplora</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#gallery">Galleria Drone</a></li>
+          <li><a href="#about">Chi Siamo</a></li>
+          <li><a href="#shop">Boutique</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="#">Spedizioni</a></li>
+          <li><a href="#">Confezioni Regalo</a></li>
+          <li><a href="#">Visita in Fattoria</a></li>
+          <li><a href="#">Abbonamento Box</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <ul>
+          <li>📍 Massa Martana (PG)</li>
+          <li>📞 +39 075 8890 1234</li>
+          <li>✉️ info@terrassaggia.it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Fattoria Terrassaggia S.r.l. — P.IVA 01234567890 — Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════ EMPLOYEE LOGIN MODAL ═══════════════════════════ -->
+<div class="modal-overlay" id="employeeLoginOverlay" onclick="closeModal('employeeLoginOverlay')">
+  <div class="modal employee-login-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('employeeLoginOverlay')">✕</button>
+    <div class="modal-header">
+      <span style="font-size:3rem">🔐</span>
+      <h2>Area Dipendenti</h2>
+      <p>Accesso riservato al personale di Fattoria Terrassaggia</p>
+    </div>
+    <div class="form-group" style="margin-top:1.5rem">
+      <label>Password</label>
+      <input type="password" id="employeePassword" placeholder="Inserisci la password..." onkeydown="if(event.key==='Enter')checkEmployeeLogin()" />
+    </div>
+    <div class="login-error" id="loginError" style="display:none">❌ Password errata</div>
+    <button class="btn-primary full-width" style="margin-top:1rem" onclick="checkEmployeeLogin()">Accedi</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ EMPLOYEE DASHBOARD ═══════════════════════════ -->
+<div class="employee-overlay" id="employeeDashboard" style="display:none">
+  <div class="employee-panel">
+    <div class="employee-header">
+      <div class="emp-title">
+        <span>🌿</span>
+        <div>
+          <h2>Dashboard Dipendenti</h2>
+          <small>Fattoria Terrassaggia — Sistema Gestione Ordini</small>
+        </div>
+      </div>
+      <div class="emp-actions">
+        <button class="btn-gold" onclick="printOrders()">🖨️ Stampa Comanda</button>
+        <button class="btn-outline-light" onclick="closeEmployeeDashboard()">✕ Chiudi</button>
+      </div>
+    </div>
+
+    <div class="emp-tabs">
+      <button class="emp-tab active" onclick="switchTab('orders', this)">📋 Ordini Ricevuti</button>
+      <button class="emp-tab" onclick="switchTab('calculator', this)">🧮 Cassa dal Vivo</button>
+      <button class="emp-tab" onclick="switchTab('comanda', this)">📄 Comanda</button>
+    </div>
+
+    <!-- ORDINI TAB -->
+    <div class="emp-content active" id="tab-orders">
+      <div class="emp-stats-row">
+        <div class="emp-stat-card">
+          <span class="emp-stat-icon">📦</span>
+          <div>
+            <strong id="statTotOrdini">0</strong>
+            <small>Ordini Totali</small>
+          </div>
+        </div>
+        <div class="emp-stat-card">
+          <span class="emp-stat-icon">💰</span>
+          <div>
+            <strong id="statFatturato">€ 0</strong>
+            <small>Fatturato Totale</small>
+          </div>
+        </div>
+        <div class="emp-stat-card">
+          <span class="emp-stat-icon">⏳</span>
+          <div>
+            <strong id="statInAttesa">0</strong>
+            <small>In Attesa</small>
+          </div>
+        </div>
+        <div class="emp-stat-card">
+          <span class="emp-stat-icon">✅</span>
+          <div>
+            <strong id="statCompletati">0</strong>
+            <small>Completati</small>
+          </div>
+        </div>
+      </div>
+      <div class="orders-list" id="ordersList">
+        <div class="no-orders">
+          <span>📋</span>
+          <p>Nessun ordine ancora ricevuto</p>
+          <small>Gli ordini dei clienti appariranno qui</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALCOLATRICE TAB -->
+    <div class="emp-content" id="tab-calculator">
+      <div class="calculator-layout">
+        <div class="calc-left">
+          <h3>🧮 Cassa dal Vivo</h3>
+          <p style="color:#888;margin-bottom:1.5rem">Aggiungi prodotti venduti fisicamente in fattoria</p>
+          <div class="calc-search-wrap">
+            <input type="text" id="calcSearch" placeholder="🔍 Cerca prodotto..." oninput="filterCalcProducts()" class="calc-search" />
+          </div>
+          <div class="calc-products-list" id="calcProductsList"></div>
+        </div>
+        <div class="calc-right">
+          <h3>📄 Scontrino</h3>
+          <div class="receipt" id="receipt">
+            <div class="receipt-header">
+              <strong>🌿 FATTORIA TERRASSAGGIA</strong>
+              <small>Vendita dal Vivo</small>
+              <small id="receiptDate"></small>
+            </div>
+            <div class="receipt-items" id="receiptItems">
+              <p style="text-align:center;color:#aaa;padding:1rem">Aggiungi prodotti dalla lista</p>
+            </div>
+            <div class="receipt-footer" id="receiptFooter" style="display:none">
+              <div class="receipt-line"><span>Subtotale</span><span id="recSubtotal">€ 0</span></div>
+              <div class="receipt-line"><span>IVA (22%)</span><span id="recIva">€ 0</span></div>
+              <div class="receipt-line receipt-total"><span>TOTALE</span><span id="recTotal">€ 0</span></div>
+            </div>
+          </div>
+          <div class="calc-btns">
+            <button class="btn-primary" onclick="printReceipt()">🖨️ Stampa</button>
+            <button class="btn-outline" onclick="clearReceipt()">🗑️ Azzera</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMANDA TAB -->
+    <div class="emp-content" id="tab-comanda">
+      <div class="comanda-header">
+        <h3>📄 Comanda — Listino Completo Prodotti</h3>
+        <button class="btn-gold" onclick="printComanda()">🖨️ Stampa Listino</button>
+      </div>
+      <div class="comanda-table-wrap">
+        <table class="comanda-table" id="comandaTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Prodotto</th>
+              <th>Categoria</th>
+              <th>Unità</th>
+              <th>Prezzo</th>
+              <th>Disponibilità</th>
+            </tr>
+          </thead>
+          <tbody id="comandaBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product detail modal -->
+<div class="modal-overlay" id="productDetailOverlay" onclick="closeModal('productDetailOverlay')">
+  <div class="modal product-detail-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('productDetailOverlay')">✕</button>
+    <div id="productDetailContent"></div>
+  </div>
+</div>
+
+<!-- Toast notifications -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
