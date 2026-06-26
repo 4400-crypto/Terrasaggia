@@ -679,8 +679,18 @@ function submitOrder(event) {
   order.iva   = order.subtotal * 0.22;
   order.total = order.subtotal + order.iva;
 
-  orders.push(order);
-  saveOrdersToStorage();
+  // Salva su Firebase
+  if (window.FB) {
+    window.FB.saveOrder(order)
+      .then(docId => { order._docId = docId; })
+      .catch(() => {
+        // fallback locale
+        orders.push(order);
+        showToast("⚠️ Ordine salvato localmente (offline)");
+      });
+  } else {
+    orders.push(order);
+  }
 
   document.getElementById('successOrderId').textContent = `Ordine: ${order.id}`;
   closeModal('checkoutOverlay');
@@ -716,17 +726,30 @@ function checkEmployeeLogin() {
   }
 }
 
+let _fbUnsubscribe = null;
+
 function openEmployeeDashboard() {
   document.getElementById('employeeDashboard').style.display = 'block';
   document.body.style.overflow = 'hidden';
-  renderOrdersTab();
   renderCalcProducts();
   renderComanda();
+
+  // Ascolta ordini in tempo reale da Firebase
+  if (window.FB) {
+    if (_fbUnsubscribe) _fbUnsubscribe();
+    _fbUnsubscribe = window.FB.listenOrders(remoteOrders => {
+      orders = remoteOrders;
+      renderOrdersTab();
+    });
+  } else {
+    renderOrdersTab();
+  }
 }
 
 function closeEmployeeDashboard() {
   document.getElementById('employeeDashboard').style.display = 'none';
   document.body.style.overflow = '';
+  if (_fbUnsubscribe) { _fbUnsubscribe(); _fbUnsubscribe = null; }
 }
 
 function switchTab(name, btn) {
@@ -777,13 +800,26 @@ function renderOrdersTab() {
 
 function confirmOrder(id) {
   const order = orders.find(o => o.id === id);
-  if (order) { order.status = 'confirmed'; saveOrdersToStorage(); renderOrdersTab(); }
+  if (!order) return;
+  if (window.FB && order._docId) {
+    window.FB.confirmOrder(order._docId);
+    // onSnapshot aggiornerà automaticamente la UI
+  } else {
+    order.status = 'confirmed';
+    renderOrdersTab();
+  }
 }
 
 function deleteOrder(id) {
-  orders = orders.filter(o => o.id !== id);
-  saveOrdersToStorage();
-  renderOrdersTab();
+  const order = orders.find(o => o.id === id);
+  if (!order) return;
+  if (window.FB && order._docId) {
+    window.FB.deleteOrder(order._docId);
+    // onSnapshot aggiornerà automaticamente la UI
+  } else {
+    orders = orders.filter(o => o.id !== id);
+    renderOrdersTab();
+  }
 }
 
 function printOrders() {
@@ -946,17 +982,17 @@ function printComanda() {
 }
 
 // ──────────────────────────────────────────────────
-// LOCAL STORAGE
+// FIREBASE PERSISTENCE
 // ──────────────────────────────────────────────────
-function saveOrdersToStorage() {
-  try { localStorage.setItem('terrassaggia_orders', JSON.stringify(orders)); } catch(e) {}
-}
+// Questi sono stub — le funzioni reali arrivano da firebase.js (module)
+// window.FB viene impostato da firebase.js appena caricato
 
+function saveOrdersToStorage() {
+  // legacy fallback, non più usato
+}
 function loadOrdersFromStorage() {
-  try {
-    const stored = localStorage.getItem('terrassaggia_orders');
-    if (stored) orders = JSON.parse(stored);
-  } catch(e) {}
+  // Non carichiamo da localStorage: Firebase carica in tempo reale
+  // tramite startFirebaseListener() chiamato da openEmployeeDashboard()
 }
 
 // ──────────────────────────────────────────────────
