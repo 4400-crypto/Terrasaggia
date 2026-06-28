@@ -1072,7 +1072,7 @@
     else { setTimeout(() => waitForProducts(cb), 50); }
   }
 
-  const CAT_LABELS = {
+  const L_L_CAT_LABELS = {
     legname: 'Legname Pregiato',
     terra:   'Prodotti della Terra',
     vini:    'Vini & Distillati',
@@ -1082,7 +1082,7 @@
     ristorazione: 'Pacchetti Ristorazione',
   };
 
-  const CAT_ICON_SVG = {
+  const L_L_CAT_ICON_SVG = {
     legname:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H5l7 7-2 7h4l-2-7 7-7h-3z"/><line x1="12" y1="22" x2="12" y2="16"/></svg>`,
     terra:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>`,
     vini:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2h8l-1 8a5 5 0 01-6 0L8 2z"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>`,
@@ -1092,7 +1092,8 @@
     ristorazione:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11c0-4.4 4-8 9-8s9 3.6 9 8"/><line x1="3" y1="11" x2="21" y2="11"/><rect x="5" y="11" width="14" height="3" rx="1"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>`,
   };
 
-  let currentFilter = 'all';
+  // currentFilter è già dichiarato in app.js — non ri-dichiarare
+  currentFilter = 'all';
 
   function setFilter(cat, btn) {
     currentFilter = cat;
@@ -1107,7 +1108,7 @@
     let visible = 0;
 
     // Show/hide per category sections
-    const cats = Object.keys(CAT_LABELS);
+    const cats = Object.keys(L_CAT_LABELS);
     cats.forEach(cat => {
       if (currentFilter !== 'all' && currentFilter !== cat) {
         const sec = document.getElementById('section-' + cat);
@@ -1207,8 +1208,8 @@
 
       sec.innerHTML = `
         <div class="section-label">
-          <div class="section-label-icon">${CAT_ICON_SVG[cat] || ''}</div>
-          <h2>${CAT_LABELS[cat]}</h2>
+          <div class="section-label-icon">${L_CAT_ICON_SVG[cat] || ''}</div>
+          <h2>${L_CAT_LABELS[cat]}</h2>
           <span class="section-count">${catProducts.length} prodotti</span>
         </div>`;
 
