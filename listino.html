@@ -1032,7 +1032,8 @@
         <div class="form-group"><label>Cognome *</label><input type="text" id="orderCognome" required placeholder="Il tuo cognome" /></div>
         <div class="form-group full"><label>Email *</label><input type="email" id="orderEmail" required placeholder="email@esempio.it" /></div>
         <div class="form-group"><label>Telefono *</label><input type="tel" id="orderTel" required placeholder="+39 000 0000000" /></div>
-        <div class="form-group"><label>Azienda</label><input type="text" id="orderAzienda" placeholder="Nome azienda (opzionale)" /></div>
+        <div class="form-group"><label>Nome Azienda *</label><input type="text" id="orderAzienda" required placeholder="Ragione sociale" /></div>
+        <div class="form-group"><label>Data di Consegna *</label><input type="date" id="orderDataConsegna" required min="" /></div>
         <div class="form-group full"><label>Indirizzo di Spedizione *</label><input type="text" id="orderIndirizzo" required placeholder="Via, numero civico" /></div>
         <div class="form-group"><label>Città *</label><input type="text" id="orderCitta" required placeholder="Città" /></div>
         <div class="form-group"><label>CAP *</label><input type="text" id="orderCap" required placeholder="00000" /></div>
@@ -1240,6 +1241,10 @@
   }
 
   waitForProducts(buildListino);
+
+  // Data minima = oggi
+  const _dateInput = document.getElementById('orderDataConsegna');
+  if (_dateInput) _dateInput.min = new Date().toISOString().split('T')[0];
 
   // Aggiorna badge carrello ogni volta che app.js modifica #cartCount
   const _badge = document.getElementById('cartCount');

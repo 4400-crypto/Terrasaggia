@@ -503,15 +503,17 @@ let currentFilter = 'all';
 // INIT
 // ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initHeroParticles();
-  initGallerySlider();
+  if (document.getElementById('navbar'))        initNavbar();
+  if (document.getElementById('heroParticles')) initHeroParticles();
+  if (document.getElementById('gallerySlider')) initGallerySlider();
   initStats();
   initRevealAnimations();
-  renderProducts();
-  initFilterBtns();
+  if (document.getElementById('productsGrid')) {
+    renderProducts();
+    initFilterBtns();
+  }
   updateCartUI();
-  setReceiptDate();
+  if (typeof setReceiptDate === 'function') setReceiptDate();
   loadOrdersFromStorage();
 });
 
@@ -863,6 +865,7 @@ function submitOrder(event) {
       citta: document.getElementById('orderCitta').value,
       cap: document.getElementById('orderCap').value,
       note: document.getElementById('orderNote').value,
+      dataConsegna: (document.getElementById('orderDataConsegna') || {}).value || '',
     },
     items: [...cart],
     subtotal: cart.reduce((s, c) => s + c.price * c.qty, 0),
@@ -878,13 +881,15 @@ function submitOrder(event) {
     window.FB.saveOrder(order)
       .then(docId => { order._docId = docId; })
       .catch(() => {
-        // fallback locale
         orders.push(order);
         showToast("Ordine salvato localmente (offline)");
       });
   } else {
     orders.push(order);
   }
+
+  // Notifica Discord
+  sendDiscordWebhook(order);
 
   document.getElementById('successOrderId').textContent = `Ordine: ${order.id}`;
   closeModal('checkoutOverlay');
@@ -1251,3 +1256,46 @@ document.addEventListener('keydown', e => {
     ['checkoutOverlay','successOverlay','employeeLoginOverlay','productDetailOverlay'].forEach(closeModal);
   }
 });
+
+// ──────────────────────────────────────────────────
+// DISCORD WEBHOOK
+// ──────────────────────────────────────────────────
+async function sendDiscordWebhook(order) {
+  const WEBHOOK = 'https://discord.com/api/webhooks/1520878062185480342/V-eyHmr0AHxsL6c9TwTsEQLN9wQ9gh7ht-A-MH4fhJTiSyXh9vhAFkvprLnZpMlFQEfQ';
+
+  const itemsList = order.items
+    .map(i => `• **${i.name}** ×${i.qty} — ${formatPrice(i.price * i.qty)}`)
+    .join('\n') || '—';
+
+  const azienda       = order.customer.azienda   || '—';
+  const referente     = `${order.customer.nome} ${order.customer.cognome}`.trim();
+  const dataConsegna  = order.customer.dataConsegna || 'Da concordare';
+
+  const payload = {
+    username: 'Fattoria Terrassaggia',
+    embeds: [{
+      title: '📦 Nuova Prenotazione Consegna',
+      color: 0x2d6a2d,
+      fields: [
+        { name: '🏢 Azienda',        value: azienda,       inline: true  },
+        { name: '👤 Referente',       value: referente,     inline: true  },
+        { name: '📅 Data Consegna',   value: dataConsegna,  inline: true  },
+        { name: '🧾 Numero Ordine',   value: order.id,      inline: true  },
+        { name: '💶 Totale (IVA inc)',value: formatPrice(order.total), inline: true },
+        { name: '📋 Prodotti Ordinati', value: itemsList,   inline: false },
+      ],
+      footer: { text: 'Sistema Ordini — Fattoria Terrassaggia S.r.l.' },
+      timestamp: new Date().toISOString(),
+    }]
+  };
+
+  try {
+    await fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Discord webhook non raggiunto:', err);
+  }
+}
