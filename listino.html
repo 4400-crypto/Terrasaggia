@@ -96,6 +96,117 @@
     }
     .btn-print-all:hover { background: var(--gold-dark); }
 
+    /* ── CART BUTTON ── */
+    .cart-btn-header {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .cart-btn-header:hover { background: rgba(201,168,76,0.15); }
+    .cart-btn-header .cart-badge {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--gold); color: var(--green-dark);
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 0.6rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      display: none;
+    }
+    .cart-btn-header .cart-badge.visible { display: flex; }
+
+    /* ── PRODUCT ROW ORDINA BUTTON ── */
+    .pr-actions { display: flex; align-items: center; gap: 0.4rem; padding: 0.7rem 0.8rem; }
+    .btn-order-sm {
+      padding: 0.35rem 0.75rem;
+      background: var(--green-dark); border: none;
+      border-radius: 6px; font-size: 0.68rem; font-weight: 700;
+      color: var(--cream); cursor: pointer; font-family: 'Montserrat', sans-serif;
+      transition: all 0.2s; white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .btn-order-sm:hover { background: var(--green); }
+
+    /* ── CART SIDEBAR ── */
+    .cart-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:900;display:none; }
+    .cart-overlay.active { display:block; }
+    .cart-sidebar {
+      position:fixed;right:0;top:0;bottom:0;width:380px;max-width:100vw;
+      background:var(--green-dark);color:var(--cream);
+      z-index:901;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;
+    }
+    .cart-sidebar.active { transform:translateX(0); }
+    .cart-header { display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.5rem;border-bottom:1px solid rgba(245,240,232,0.1); }
+    .cart-header h3 { font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cream);display:flex;align-items:center;gap:0.5rem; }
+    .cart-header h3 svg { stroke:var(--gold); }
+    .cart-header button { background:transparent;border:none;color:rgba(245,240,232,0.5);font-size:1.2rem;cursor:pointer; }
+    .cart-header button:hover { color:var(--cream); }
+    .cart-items { flex:1;overflow-y:auto;padding:1rem 1.5rem; }
+    .cart-empty { text-align:center;padding:3rem 1rem; }
+    .cart-empty p { color:rgba(245,240,232,0.5);margin-top:0.8rem;font-size:0.85rem; }
+    .cart-empty small { color:rgba(245,240,232,0.3);font-size:0.72rem; }
+    .cart-empty-icon { color:rgba(245,240,232,0.2);display:block;margin:0 auto 0.5rem; }
+    .cart-item { display:flex;align-items:flex-start;gap:0.8rem;padding:0.8rem 0;border-bottom:1px solid rgba(245,240,232,0.07); }
+    .cart-item-icon { width:36px;height:36px;border-radius:6px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .cart-item-icon svg { width:18px;height:18px;stroke:var(--gold); }
+    .cart-item-info { flex:1;min-width:0; }
+    .cart-item-name { font-size:0.78rem;font-weight:600;color:var(--cream);line-height:1.3;margin-bottom:0.2rem; }
+    .cart-item-price { font-family:'Playfair Display',serif;font-size:0.9rem;color:var(--gold); }
+    .cart-item-controls { display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem; }
+    .qty-btn { background:rgba(255,255,255,0.08);border:none;color:var(--cream);width:22px;height:22px;border-radius:4px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center; }
+    .qty-btn:hover { background:rgba(255,255,255,0.15); }
+    .qty-num { font-size:0.8rem;color:var(--cream);min-width:16px;text-align:center; }
+    .cart-item-remove { background:transparent;border:none;color:rgba(245,240,232,0.3);cursor:pointer;font-size:1rem;padding:0 0.2rem;align-self:flex-start; }
+    .cart-item-remove:hover { color:#e74c3c; }
+    .cart-footer { padding:1.2rem 1.5rem;border-top:1px solid rgba(245,240,232,0.1); }
+    .cart-total-row { display:flex;justify-content:space-between;font-size:0.8rem;color:rgba(245,240,232,0.6);margin-bottom:0.4rem; }
+    .cart-total-row.total-final { font-size:1rem;font-weight:700;color:var(--cream);margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid rgba(245,240,232,0.15); }
+    .btn-primary.full-width { width:100%;justify-content:center;margin-bottom:0.5rem;margin-top:0.8rem; }
+    .btn-outline.full-width { width:100%;justify-content:center; }
+    .btn-outline { background:transparent;border:1px solid rgba(245,240,232,0.25);color:rgba(245,240,232,0.7);padding:0.7rem 1.2rem;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s; }
+    .btn-outline:hover { border-color:var(--cream);color:var(--cream); }
+
+    /* ── CHECKOUT MODAL ── */
+    .modal-overlay { position:fixed;inset:0;background:rgba(10,25,10,0.75);backdrop-filter:blur(6px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s; }
+    .modal-overlay.open { opacity:1;pointer-events:all; }
+    .modal { background:white;border-radius:16px;max-width:640px;width:calc(100% - 2rem);max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform 0.3s; }
+    .modal-overlay.open .modal { transform:translateY(0); }
+    .modal-close { position:absolute;top:1rem;right:1rem;background:#f5f5f5;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:0.9rem;color:#666;transition:all 0.2s; }
+    .modal-close:hover { background:var(--green-dark);color:white; }
+    .modal-header { padding:2rem 2rem 1rem;border-bottom:1px solid #f0ece3; }
+    .modal-header h2 { font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green-dark);margin-bottom:0.3rem; }
+    .modal-header p { font-size:0.82rem;color:var(--text-light); }
+    .checkout-modal form { padding:1.5rem 2rem 2rem; }
+    .form-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem; }
+    .form-group { display:flex;flex-direction:column;gap:0.3rem; }
+    .form-group.full { grid-column:1/-1; }
+    .form-group label { font-size:0.72rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-mid); }
+    .form-group input,.form-group textarea { padding:0.65rem 0.9rem;border:1.5px solid #ddd;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.83rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;resize:vertical; }
+    .form-group input:focus,.form-group textarea:focus { border-color:var(--green); }
+    .checkout-summary { background:#f8f5ef;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.2rem;font-size:0.8rem;color:var(--text-mid); }
+    .btn-primary { display:inline-flex;align-items:center;gap:0.4rem;padding:0.85rem 2rem;background:var(--green-dark);color:var(--cream);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s; }
+    .btn-primary:hover { background:var(--green); }
+
+    /* ── SUCCESS MODAL ── */
+    .success-modal { padding:3rem 2.5rem;text-align:center;max-width:480px; }
+    .success-animation { margin-bottom:1.5rem; }
+    .success-circle { width:70px;height:70px;border-radius:50%;background:var(--green-dark);color:white;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto; }
+    .success-modal h2 { font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--green-dark);margin-bottom:0.8rem; }
+    .success-modal p { font-size:0.85rem;color:var(--text-mid);line-height:1.7;margin-bottom:0.5rem; }
+    .order-id { font-weight:700;color:var(--gold-dark);font-size:0.9rem; }
+    .toast-container { position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:0.5rem; }
+    .toast { background:var(--green-dark);color:var(--cream);padding:0.75rem 1.2rem;border-radius:8px;font-size:0.78rem;display:flex;align-items:center;gap:0.5rem;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:slideInToast 0.3s ease; }
+    .toast svg { stroke:var(--gold);flex-shrink:0; }
+    @keyframes slideInToast { from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1} }
+
     /* ── HERO STRIP ── */
     .listino-hero {
       background: linear-gradient(135deg, var(--green-dark) 0%, #1e3d1e 60%, #2a5a2a 100%);
@@ -475,6 +586,11 @@
       </div>
     </a>
     <div class="header-right">
+      <button class="cart-btn-header" onclick="toggleCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg>
+        Ordine
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
       <a href="index.html" class="btn-back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polyline points="15 18 9 12 15 6"/></svg>
         Torna al Sito
@@ -879,6 +995,72 @@
   <p>© 2024 Fattoria Terrassaggia S.r.l. — Listino prezzi riservato uso B2B — <a href="index.html">Torna al sito</a></p>
 </footer>
 
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg> Il Tuo Ordine</h3>
+    <button onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <span class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg></span>
+      <p>Il tuo carrello è vuoto</p>
+      <small>Aggiungi prodotti dal listino</small>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row"><span>Subtotale:</span><span id="cartSubtotal">€ 0</span></div>
+    <div class="cart-total-row"><span>IVA (22%):</span><span id="cartIva">€ 0</span></div>
+    <div class="cart-total-row total-final"><span>Totale:</span><span id="cartTotal">€ 0</span></div>
+    <button class="btn-primary full-width" onclick="openCheckout()">Procedi all'Ordine</button>
+    <button class="btn-outline full-width" onclick="clearCart()">Svuota Carrello</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutOverlay" onclick="closeModal('checkoutOverlay')">
+  <div class="modal checkout-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('checkoutOverlay')">✕</button>
+    <div class="modal-header">
+      <h2>Completa il Tuo Ordine</h2>
+      <p>Inserisci i tuoi dati per finalizzare l'acquisto</p>
+    </div>
+    <form id="checkoutForm" onsubmit="submitOrder(event)">
+      <div class="form-grid">
+        <div class="form-group"><label>Nome *</label><input type="text" id="orderNome" required placeholder="Il tuo nome" /></div>
+        <div class="form-group"><label>Cognome *</label><input type="text" id="orderCognome" required placeholder="Il tuo cognome" /></div>
+        <div class="form-group full"><label>Email *</label><input type="email" id="orderEmail" required placeholder="email@esempio.it" /></div>
+        <div class="form-group"><label>Telefono *</label><input type="tel" id="orderTel" required placeholder="+39 000 0000000" /></div>
+        <div class="form-group"><label>Azienda</label><input type="text" id="orderAzienda" placeholder="Nome azienda (opzionale)" /></div>
+        <div class="form-group full"><label>Indirizzo di Spedizione *</label><input type="text" id="orderIndirizzo" required placeholder="Via, numero civico" /></div>
+        <div class="form-group"><label>Città *</label><input type="text" id="orderCitta" required placeholder="Città" /></div>
+        <div class="form-group"><label>CAP *</label><input type="text" id="orderCap" required placeholder="00000" /></div>
+        <div class="form-group full"><label>Note speciali</label><textarea id="orderNote" rows="3" placeholder="Istruzioni particolari…"></textarea></div>
+      </div>
+      <div class="checkout-summary" id="checkoutSummary"></div>
+      <button type="submit" class="btn-primary full-width">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+        Conferma Ordine
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successOverlay" onclick="closeModal('successOverlay')">
+  <div class="modal success-modal" onclick="event.stopPropagation()">
+    <div class="success-animation"><div class="success-circle">✓</div></div>
+    <h2>Ordine Ricevuto!</h2>
+    <p>Grazie per aver scelto Fattoria Terrassaggia. Riceverai una conferma via email entro pochi minuti.</p>
+    <p class="order-id" id="successOrderId"></p>
+    <button class="btn-primary" onclick="closeModal('successOverlay')" style="margin:0 auto">Continua lo Shopping</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
 <!-- SCRIPT -->
 <script type="module" src="firebase.js"></script>
 <script src="app.js"></script>
@@ -1044,6 +1226,7 @@
           <div class="pr-price">${p.priceLabel}</div>
           <div class="pr-actions">
             <button class="btn-detail-sm" onclick="openDetail(${p.id})">Dettagli</button>
+            <button class="btn-order-sm" onclick="addToCart(${p.id}, event)">+ Ordina</button>
           </div>`;
         sec.appendChild(row);
       });
@@ -1057,6 +1240,14 @@
   }
 
   waitForProducts(buildListino);
+
+  // Aggiorna badge carrello ogni volta che app.js modifica #cartCount
+  const _badge = document.getElementById('cartCount');
+  const _observer = new MutationObserver(() => {
+    const n = parseInt(_badge.textContent) || 0;
+    _badge.classList.toggle('visible', n > 0);
+  });
+  _observer.observe(_badge, { childList: true, characterData: true, subtree: true });
 </script>
 </body>
 </html>

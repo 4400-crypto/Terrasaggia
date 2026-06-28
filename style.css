@@ -726,6 +726,64 @@ a { color: inherit; text-decoration: none; }
   background: #f8f5ef;
 }
 
+/* Shop CTA (sostituisce il listino nella home) */
+.shop-cta-section {
+  padding: 7rem 4rem;
+  background: #f8f5ef;
+  text-align: center;
+}
+.shop-cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.shop-cta-inner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--green-dark);
+  line-height: 1.2;
+  margin: 1rem 0 0.8rem;
+}
+.shop-cta-inner h2 em { color: var(--gold-dark); font-style: italic; }
+.shop-cta-inner p {
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+}
+.shop-cta-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+.cta-stat strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--green-dark);
+  line-height: 1;
+}
+.cta-stat span {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.cta-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: #d5cfc5;
+}
+.shop-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 1rem 2.5rem;
+}
+
 .shop-filters {
   display: flex;
   gap: 0.6rem;
