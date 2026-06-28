@@ -1066,175 +1066,218 @@
 <script type="module" src="firebase.js"></script>
 <script src="app.js"></script>
 <script>
-  // ── Attende che app.js carichi PRODUCTS ──
-  function waitForProducts(cb) {
-    if (typeof PRODUCTS !== 'undefined') { cb(); }
-    else { setTimeout(() => waitForProducts(cb), 50); }
-  }
+(function() {
+  'use strict';
 
-  const L_L_CAT_LABELS = {
-    legname: 'Legname Pregiato',
-    terra:   'Prodotti della Terra',
-    vini:    'Vini & Distillati',
-    carni:   'Carni Pregiate',
-    latte:   'Latte & Derivati',
-    brico:   'Pacchetti Edilizia',
-    ristorazione: 'Pacchetti Ristorazione',
+  /* ── Costanti ─────────────────────────────────────────── */
+  var CAT_NAMES = {
+    legname:      'Legname Pregiato',
+    terra:        'Prodotti della Terra',
+    vini:         'Vini & Distillati',
+    carni:        'Carni Pregiate',
+    latte:        'Latte & Derivati',
+    brico:        'Pacchetti Edilizia',
+    ristorazione: 'Pacchetti Ristorazione'
   };
 
-  const L_L_CAT_ICON_SVG = {
-    legname:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H5l7 7-2 7h4l-2-7 7-7h-3z"/><line x1="12" y1="22" x2="12" y2="16"/></svg>`,
-    terra:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>`,
-    vini:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2h8l-1 8a5 5 0 01-6 0L8 2z"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>`,
-    carni:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3C4 5 3 9 5 12l7 9 7-9c2-3 1-7-2-9a5 5 0 00-5 1 5 5 0 00-5-1z"/></svg>`,
-    latte:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M9 4V2h6v2"/><line x1="9" y1="11" x2="15" y2="11"/></svg>`,
-    brico:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="14" width="20" height="4" rx="1"/><path d="M6 14V8a6 6 0 0112 0v6"/></svg>`,
-    ristorazione:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11c0-4.4 4-8 9-8s9 3.6 9 8"/><line x1="3" y1="11" x2="21" y2="11"/><rect x="5" y="11" width="14" height="3" rx="1"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>`,
+  var CAT_SVG = {
+    legname:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H5l7 7-2 7h4l-2-7 7-7h-3z"/><line x1="12" y1="22" x2="12" y2="16"/></svg>',
+    terra:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>',
+    vini:         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2h8l-1 8a5 5 0 01-6 0L8 2z"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>',
+    carni:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3C4 5 3 9 5 12l7 9 7-9c2-3 1-7-2-9a5 5 0 00-5 1 5 5 0 00-5-1z"/></svg>',
+    latte:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M9 4V2h6v2"/><line x1="9" y1="11" x2="15" y2="11"/></svg>',
+    brico:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="14" width="20" height="4" rx="1"/><path d="M6 14V8a6 6 0 0112 0v6"/></svg>',
+    ristorazione: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11c0-4.4 4-8 9-8s9 3.6 9 8"/><line x1="3" y1="11" x2="21" y2="11"/><rect x="5" y="11" width="14" height="3" rx="1"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>'
   };
 
-  // Variabile filtro locale al listino — indipendente da app.js
-  var _f = 'all';
+  var CAT_ORDER = ['legname','terra','vini','carni','latte','brico','ristorazione'];
 
-  function setFilter(cat, btn) {
-    _f = cat;
-    document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    applyFilters();
-  }
+  /* ── Stato filtri ─────────────────────────────────────── */
+  var activeFilter = 'all';
 
-  function applyFilters() {
-    var query = document.getElementById('searchInput').value.toLowerCase().trim();
-    var sort  = document.getElementById('sortSelect').value;
-    var visible = 0;
-
-    // Show/hide sezioni per categoria
-    var cats = Object.keys(L_CAT_LABELS);
-    cats.forEach(function(cat) {
-      var sec = document.getElementById('section-' + cat);
-      if (!sec) return;
-      sec.style.display = (_f !== 'all' && _f !== cat) ? 'none' : '';
-    });
-
-    // Recupera tutte le righe e applica filtri
-    var allRows = Array.from(document.querySelectorAll('.product-row'));
-
-    allRows.forEach(function(row) {
-      var id = parseInt(row.dataset.id);
-      var p  = PRODUCTS.find(function(x) { return x.id === id; });
-      if (!p) return;
-
-      var matchCat    = (_f === 'all') || (p.cat === _f);
-      var matchSearch = !query ||
-        p.name.toLowerCase().indexOf(query) >= 0 ||
-        p.desc.toLowerCase().indexOf(query) >= 0 ||
-        (p.catLabel || '').toLowerCase().indexOf(query) >= 0 ||
-        (p.badge || '').toLowerCase().indexOf(query) >= 0;
-
-      var show = matchCat && matchSearch;
-      row.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-
-    document.getElementById('visibleCount').textContent = visible;
-    document.getElementById('noResults').style.display  = visible === 0 ? 'block' : 'none';
-    document.getElementById('listinoMain').style.display = visible === 0 ? 'none'  : '';
-  }
-
-  function openDetail(id) {
-    const p = PRODUCTS.find(x => x.id === id);
-    if (!p) return;
-    const details = p.detail.split(/\||\n/).map(d => d.trim()).filter(Boolean);
-    const badgeClass = ['LUXURY','RARISSIMO','RARO'].includes(p.badge) ? 'luxury' : (p.badge === 'BIOLOGICO' ? 'bio' : '');
-    document.getElementById('detailContent').innerHTML = `
-      <div class="dm-cat">${p.catLabel}</div>
-      ${p.badge ? `<span class="pr-badge ${badgeClass}" style="margin-bottom:0.6rem;display:inline-block">${p.badge}</span>` : ''}
-      <div class="dm-title">${p.name}</div>
-      <div class="dm-price">${p.priceLabel}</div>
-      <div class="dm-unit">${p.unit}</div>
-      <div class="dm-desc">${p.desc}</div>
-      <div class="dm-detail">
-        ${details.map(d => {
-          const colon = d.indexOf(':');
-          if (colon === -1) return `<div><span>${d}</span></div>`;
-          const key = d.slice(0, colon);
-          const val = d.slice(colon + 1).trim();
-          return `<div><strong>${key}:</strong><span>${val}</span></div>`;
-        }).join('')}
-      </div>`;
-    document.getElementById('detailOverlay').classList.add('open');
-  }
-
-  function closeDetail(e) {
-    if (e.target === document.getElementById('detailOverlay')) {
-      document.getElementById('detailOverlay').classList.remove('open');
-    }
-  }
-
-  function contactPackage(name) {
-    alert(`Pacchetto "${name}" — Per richiedere un preventivo personalizzato, contattare il nostro ufficio commerciale durante gli orari Lun–Sab 8:00–18:00.`);
-  }
-
+  /* ── Build listino ────────────────────────────────────── */
   function buildListino() {
-    const main = document.getElementById('listinoMain');
+    var prods = typeof PRODUCTS !== 'undefined' ? PRODUCTS : [];
+    var main  = document.getElementById('listinoMain');
+    if (!main) return;
     main.innerHTML = '';
-    const cats = ['legname','terra','vini','carni','latte','brico','ristorazione'];
 
-    cats.forEach(cat => {
-      const catProducts = PRODUCTS.filter(p => p.cat === cat);
-      if (!catProducts.length) return;
+    CAT_ORDER.forEach(function(cat) {
+      var catProds = prods.filter(function(p) { return p.cat === cat; });
+      if (!catProds.length) return;
 
-      const sec = document.createElement('div');
+      var sec = document.createElement('div');
       sec.className = 'listino-section';
       sec.id = 'section-' + cat;
 
-      sec.innerHTML = `
-        <div class="section-label">
-          <div class="section-label-icon">${L_CAT_ICON_SVG[cat] || ''}</div>
-          <h2>${L_CAT_LABELS[cat]}</h2>
-          <span class="section-count">${catProducts.length} prodotti</span>
-        </div>`;
+      var lbl = document.createElement('div');
+      lbl.className = 'section-label';
+      lbl.innerHTML =
+        '<div class="section-label-icon">' + (CAT_SVG[cat] || '') + '</div>' +
+        '<h2>' + (CAT_NAMES[cat] || cat) + '</h2>' +
+        '<span class="section-count">' + catProds.length + ' prodotti</span>';
+      sec.appendChild(lbl);
 
-      catProducts.forEach(p => {
-        const badgeClass = ['LUXURY','RARISSIMO','RARO'].includes(p.badge) ? 'luxury' : (p.badge === 'BIOLOGICO' ? 'bio' : '');
-        const row = document.createElement('div');
+      catProds.forEach(function(p) {
+        var badgeClass = (['LUXURY','RARISSIMO','RARO'].indexOf(p.badge) !== -1) ? 'luxury'
+                       : (p.badge === 'BIOLOGICO' ? 'bio' : '');
+        var desc100 = (p.desc || '').slice(0, 100);
+        if ((p.desc || '').length > 100) desc100 += '…';
+
+        var row = document.createElement('div');
         row.className = 'product-row';
-        row.dataset.id = p.id;
-        row.innerHTML = `
-          <div class="pr-name">
-            ${p.badge ? `<span class="pr-badge ${badgeClass}">${p.badge}</span>` : ''}
-            <strong>${p.name}</strong>
-            <small>${p.desc.slice(0, 100)}…</small>
-          </div>
-          <div class="pr-unit">${p.unit}</div>
-          <div class="pr-price">${p.priceLabel}</div>
-          <div class="pr-actions">
-            <button class="btn-detail-sm" onclick="openDetail(${p.id})">Dettagli</button>
-            <button class="btn-order-sm" onclick="addToCart(${p.id}, event)">+ Ordina</button>
-          </div>`;
+        row.setAttribute('data-id', p.id);
+        row.setAttribute('data-cat', p.cat);
+        row.setAttribute('data-price', p.price || 0);
+        row.setAttribute('data-name', (p.name || '').toLowerCase());
+
+        row.innerHTML =
+          '<div class="pr-name">' +
+            (p.badge ? '<span class="pr-badge ' + badgeClass + '">' + p.badge + '</span>' : '') +
+            '<strong>' + p.name + '</strong>' +
+            '<small>' + desc100 + '</small>' +
+          '</div>' +
+          '<div class="pr-unit">' + (p.unit || '') + '</div>' +
+          '<div class="pr-price">' + (p.priceLabel || '') + '</div>' +
+          '<div class="pr-actions">' +
+            '<button class="btn-detail-sm" onclick="listinoOpenDetail(' + p.id + ')">Dettagli</button>' +
+            '<button class="btn-order-sm"  onclick="addToCart(' + p.id + ', event)">+ Ordina</button>' +
+          '</div>';
+
         sec.appendChild(row);
       });
 
       main.appendChild(sec);
     });
 
-    document.getElementById('heroTotal').textContent = PRODUCTS.length;
-    document.getElementById('visibleCount').textContent = PRODUCTS.length;
+    document.getElementById('heroTotal').textContent = prods.length;
     applyFilters();
   }
 
-  waitForProducts(buildListino);
+  /* ── Filtri & ricerca ─────────────────────────────────── */
+  function applyFilters() {
+    var query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+    var sort  = (document.getElementById('sortSelect')   || {}).value || 'default';
+    var visible = 0;
+    var prods = typeof PRODUCTS !== 'undefined' ? PRODUCTS : [];
 
-  // Data minima = oggi
-  const _dateInput = document.getElementById('orderDataConsegna');
-  if (_dateInput) _dateInput.min = new Date().toISOString().split('T')[0];
+    // Nascondi/mostra sezioni intere
+    CAT_ORDER.forEach(function(cat) {
+      var sec = document.getElementById('section-' + cat);
+      if (sec) sec.style.display = (activeFilter !== 'all' && activeFilter !== cat) ? 'none' : '';
+    });
 
-  // Aggiorna badge carrello ogni volta che app.js modifica #cartCount
-  const _badge = document.getElementById('cartCount');
-  const _observer = new MutationObserver(() => {
-    const n = parseInt(_badge.textContent) || 0;
-    _badge.classList.toggle('visible', n > 0);
+    // Ordina righe se richiesto
+    var allRows = Array.prototype.slice.call(document.querySelectorAll('.product-row'));
+
+    if (sort === 'price-asc' || sort === 'price-desc' || sort === 'name-asc') {
+      allRows.sort(function(a, b) {
+        if (sort === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+        if (sort === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+        if (sort === 'name-asc')   return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        return 0;
+      });
+      var main = document.getElementById('listinoMain');
+      CAT_ORDER.forEach(function(cat) {
+        var sec = document.getElementById('section-' + cat);
+        if (!sec) return;
+        allRows.forEach(function(row) {
+          if (row.dataset.cat === cat) sec.appendChild(row);
+        });
+      });
+    }
+
+    // Mostra/nascondi singole righe
+    allRows.forEach(function(row) {
+      var id = parseInt(row.dataset.id, 10);
+      var p  = prods.find(function(x) { return x.id === id; });
+      if (!p) { row.style.display = 'none'; return; }
+
+      var matchCat = (activeFilter === 'all') || (p.cat === activeFilter);
+      var matchQ   = !query ||
+        (p.name  || '').toLowerCase().indexOf(query) !== -1 ||
+        (p.desc  || '').toLowerCase().indexOf(query) !== -1 ||
+        (p.badge || '').toLowerCase().indexOf(query) !== -1;
+
+      var show = matchCat && matchQ;
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    document.getElementById('visibleCount').textContent = visible;
+    document.getElementById('noResults').style.display   = visible === 0 ? 'block' : 'none';
+    document.getElementById('listinoMain').style.display  = visible === 0 ? 'none'  : '';
+  }
+
+  /* ── Dettaglio prodotto ───────────────────────────────── */
+  function listinoOpenDetail(id) {
+    var prods = typeof PRODUCTS !== 'undefined' ? PRODUCTS : [];
+    var p = prods.find(function(x) { return x.id === id; });
+    if (!p) return;
+
+    var details = (p.detail || '').split(/[|\n]/).map(function(d) { return d.trim(); }).filter(Boolean);
+    var badgeClass = (['LUXURY','RARISSIMO','RARO'].indexOf(p.badge) !== -1) ? 'luxury'
+                   : (p.badge === 'BIOLOGICO' ? 'bio' : '');
+
+    var detailsHTML = details.map(function(d) {
+      var ci = d.indexOf(':');
+      if (ci === -1) return '<div><span>' + d + '</span></div>';
+      return '<div><strong>' + d.slice(0, ci) + ':</strong><span>' + d.slice(ci + 1).trim() + '</span></div>';
+    }).join('');
+
+    document.getElementById('detailContent').innerHTML =
+      '<div class="dm-cat">' + (p.catLabel || CAT_NAMES[p.cat] || p.cat) + '</div>' +
+      (p.badge ? '<span class="pr-badge ' + badgeClass + '" style="margin-bottom:0.6rem;display:inline-block">' + p.badge + '</span>' : '') +
+      '<div class="dm-title">' + p.name + '</div>' +
+      '<div class="dm-price">' + (p.priceLabel || '') + '</div>' +
+      '<div class="dm-unit">'  + (p.unit       || '') + '</div>' +
+      '<div class="dm-desc">'  + (p.desc       || '') + '</div>' +
+      '<div class="dm-detail">' + detailsHTML + '</div>';
+
+    document.getElementById('detailOverlay').classList.add('open');
+  }
+
+  /* ── Pacchetti ────────────────────────────────────────── */
+  function contactPackage(name) {
+    alert('Pacchetto "' + name + '" — Per un preventivo personalizzato contatta il nostro ufficio commerciale: Lun–Sab 8:00–18:00.');
+  }
+
+  /* ── Esponi funzioni globali ──────────────────────────── */
+  window.setFilter = function(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.filter-chip').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    applyFilters();
+  };
+
+  window.applyFilters    = applyFilters;
+  window.listinoOpenDetail = listinoOpenDetail;
+  window.contactPackage  = contactPackage;
+
+  window.closeDetail = function(e) {
+    if (e.target === document.getElementById('detailOverlay')) {
+      document.getElementById('detailOverlay').classList.remove('open');
+    }
+  };
+
+  /* ── Init ─────────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function() {
+    buildListino();
+
+    var di = document.getElementById('orderDataConsegna');
+    if (di) di.min = new Date().toISOString().split('T')[0];
+
+    // Aggiorna visibilità badge carrello
+    var badge = document.getElementById('cartCount');
+    if (badge) {
+      new MutationObserver(function() {
+        var n = parseInt(badge.textContent, 10) || 0;
+        badge.classList.toggle('visible', n > 0);
+      }).observe(badge, { childList: true, characterData: true, subtree: true });
+    }
   });
-  _observer.observe(_badge, { childList: true, characterData: true, subtree: true });
+
+}());
 </script>
 </body>
 </html>

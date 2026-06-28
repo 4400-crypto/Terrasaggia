@@ -533,6 +533,9 @@ let currentFilter = 'all';
 // INIT
 // ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // listino.html è completamente autocontenuto — app.js non deve inizializzarsi lì
+  if (document.getElementById('listinoMain')) return;
+
   if (document.getElementById('navbar'))        initNavbar();
   if (document.getElementById('heroParticles')) initHeroParticles();
   if (document.getElementById('gallerySlider')) initGallerySlider();
