@@ -7,7 +7,15 @@
 // ──────────────────────────────────────────────────
 // PRODUCTS DATABASE  (90 prodotti, nessuna foto)
 // ──────────────────────────────────────────────────
-const CAT_ICONS = { legname:'🌲', terra:'🌿', vini:'🍷', carni:'🥩', latte:'🥛' };
+const CAT_ICONS = {
+  legname: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H5l7 7-2 7h4l-2-7 7-7h-3z"/><line x1="12" y1="22" x2="12" y2="16"/></svg>`,
+  terra:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>`,
+  vini:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2h8l-1 8a5 5 0 01-6 0L8 2z"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>`,
+  carni:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3C4 5 3 9 5 12l7 9 7-9c2-3 1-7-2-9a5 5 0 00-5 1 5 5 0 00-5-1z"/></svg>`,
+  latte:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M9 4V2h6v2"/><line x1="9" y1="11" x2="15" y2="11"/></svg>`,
+  brico:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="14" width="20" height="4" rx="1"/><path d="M6 14V8a6 6 0 0112 0v6"/><line x1="12" y1="2" x2="12" y2="4"/></svg>`,
+  ristorazione: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11c0-4.4 4-8 9-8s9 3.6 9 8"/><line x1="3" y1="11" x2="21" y2="11"/><rect x="5" y="11" width="14" height="3" rx="1"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>`,
+};
 
 const PRODUCTS = [
 
@@ -382,6 +390,80 @@ const PRODUCTS = [
   { id:88, name:'Cardamomo Verde del Kerala — Selezione Tenuta', cat:'terra', catLabel:'Prodotti della Terra', price:680, priceLabel:'€ 680', unit:'per 100g', badge:'RARO', desc:'Cardamomo verde (Elettaria cardamomum) proveniente da piantagioni biologiche del Kerala selezionate personalmente dalla tenuta ogni anno. Solo capsule di grado "Extra Bold" — diametro >8mm — raccolte a mano a completa maturazione. Contenuto in cineolo (aroma): 4× le capsule commerciali standard.', detail:'Specie: Elettaria cardamomum | Origine: Kerala, piantagioni biologiche | Grado: Extra Bold (>8mm) | Cineolo: 4× standard commerciale | Raccolta: A mano, completa maturazione | Selezione: Annuale diretta', available:true },
   { id:89, name:'Noce di Pecan della Tenuta — Prima Spremitura', cat:'terra', catLabel:'Prodotti della Terra', price:420, priceLabel:'€ 420', unit:'per kg', badge:'BIOLOGICO', desc:'Noci pecan (Carya illinoinensis) coltivate in un lotto sperimentale di 80 piante piantate nel 1995 nella tenuta. Le piante, ora mature, producono frutti con contenuto in acidi grassi omega-9 superiore all\'olio d\'oliva extravergine. Sgusciatura a mano, senza trattamenti post-raccolta.', detail:'Specie: Carya illinoinensis | Impianto: 1995, 80 piante | Omega-9: Superiore all\'olio d\'oliva | Sgusciatura: A mano | Trattamenti post-raccolta: Nessuno | Disponibilità: Ottobre–Novembre', available:true },
   { id:90, name:'Box Rifornimento Ristorante — Mensile', cat:'terra', catLabel:'Prodotti della Terra', price:18500, priceLabel:'€ 18.500', unit:'per box mensile', badge:'LUXURY', desc:'Pacchetto di rifornimento mensile progettato per ristoranti stellati: 200g tartufo stagionale, 2L olio EVO Gran Cru, 500g funghi porcini, 1kg miele, 1g zafferano, selezione vini (6 bottiglie), selezione formaggi (3 tipologie 1kg cad.), 5kg carne selezionata, consegna programmata con temperature garantite.', detail:'Contenuto: Variabile per stagione | Tartufo: 200g | Olio: 2L | Vini: 6 bottiglie selezione | Formaggi: 3 tipologie 1kg | Carne: 5kg selezione | Consegna: Programmata con catena del freddo certificata | Contratto: Annuale con prezzi bloccati', available:true },
+
+  // ── PACCHETTI EDILIZIA & BRICO ────────────────────
+  {
+    id:91, name:'Pacchetto Brico Base — Legname Strutturale', cat:'brico', catLabel:'Pacchetti Edilizia',
+    price:162000, priceLabel:'€ 162.000', unit:'fornitura singola', badge:'LUXURY',
+    desc:'Fornitura completa per cantieri residenziali di medie dimensioni. Legname strutturale certificato per carpenteria, travi portanti in abete rosso alpino, tavolame di castagno per pavimentazioni e rivestimenti, perlinato di larice per esterni. Consegna e scarico inclusi, documentazione CE allegata.',
+    detail:'• 80m³ Abete rosso alpino C24 — travi e correnti strutturali\n• 20m³ Castagno stagionato 4 anni — pavimentazione\n• 15m³ Larice perlinato — rivestimenti esterni\n• 8m³ Quercia bianca — soglie e stipiti\n• 5m³ Ciliegio piallato — finiture interne\n• Bulloneria zincata a caldo inclusa\n• Documentazione CE per uso strutturale\n• Consegna in cantiere con gru scarico',
+    available:true,
+  },
+  {
+    id:92, name:'Pacchetto Brico Comfort — Ristrutturazione Completa', cat:'brico', catLabel:'Pacchetti Edilizia',
+    price:245000, priceLabel:'€ 245.000', unit:'fornitura singola', badge:'LUXURY',
+    desc:'Fornitura pensata per ristrutturazioni integrali di immobili storici e ville di pregio. Include legname strutturale, pavimentazione massello, rivestimenti, boiserie su misura e materiali da carpenteria di finitura. Ogni partita numerata e abbinata al progetto architettonico con dossier fotografico.',
+    detail:'• 120m³ Quercia bianca stagionata 5 anni — strutture e pavimenti\n• 30m³ Noce nazionale — boiserie e arredi fissi\n• 25m³ Castagno — travi a vista e soffitti\n• 20m³ Ciliegio selvatico — parquet massello\n• 10m³ Larice — serramenti e infissi grezzi\n• 8m³ Tiglio — pannelli intaglio decorativo\n• 5m³ Abete rosso — sottostrutture nascoste\n• Sopralluogo tecnico incluso\n• Progetto di posa con geometra convenzionato\n• Dossier fotografico e certificati FSC',
+    available:true,
+  },
+  {
+    id:93, name:'Pacchetto Brico Premium — Villa Lusso', cat:'brico', catLabel:'Pacchetti Edilizia',
+    price:380000, priceLabel:'€ 380.000', unit:'fornitura singola', badge:'RARISSIMO',
+    desc:'Il pacchetto di punta per costruzioni e ristrutturazioni di lusso assoluto. Legname selezionato uno a uno, con venature certificate e numerate. Include essenze rare (noce nero, bosso, gelso) per finiture di altissimo livello, oltre al legname strutturale di pregio. Servizio white-glove con project manager dedicato.',
+    detail:'• 200m³ Quercia bianca 120 anni — struttura e pavimenti\n• 40m³ Noce nazionale venato — boiserie e scale\n• 30m³ Ciliegio selvatico rosa — parquet e rivestimenti\n• 15m³ Noce nero americano — arredi fissi su misura\n• 10m³ Gelso bianco invecchiato 10 anni — finiture pregiate\n• 8m³ Bosso Buxus — cornici e intarsi\n• 6m³ Pero selvatico radica — oggettistica e maniglie\n• 5m³ Acero flammé — pannelli decorativi\n• 4m³ Larice alpino — decking esterno\n• Project manager dedicato per tutta la fornitura\n• 3 sopralluoghi tecnici in cantiere\n• Garanzia qualità 10 anni su legname strutturale\n• Certificazione FSC, PEFC e dichiarazione DoP',
+    available:true,
+  },
+  {
+    id:94, name:'Pacchetto Brico Industriale — Capannone e Strutture', cat:'brico', catLabel:'Pacchetti Edilizia',
+    price:520000, priceLabel:'€ 520.000', unit:'fornitura singola', badge:'LUXURY',
+    desc:'Fornitura su scala industriale per capannoni, coperture agricole di pregio, strutture ricettive in legno e resort di montagna. Volumi di fornitura superiori a 300m³ con legname lamellare certificato classe GL28h e travi in abete rosso alpino a bassa umidità.',
+    detail:'• 300m³ Abete rosso alpino GL28h — struttura lamellare\n• 80m³ Castagno — rivestimenti interni ed esterni\n• 50m³ Larice — copertura e grondaie in legno\n• 40m³ Quercia — pavimentazione industriale rinforzata\n• 20m³ Pino cembro — cappotto interno e intercapedine\n• Calcolo strutturale e progetto esecutivo inclusi\n• Consegna frazionata in base a SAL cantiere\n• Assistenza tecnica in cantiere per montaggio\n• Assicurazione decennale struttura inclusa',
+    available:true,
+  },
+  {
+    id:95, name:'Pacchetto Brico Masterclass — Committenza Privata', cat:'brico', catLabel:'Pacchetti Edilizia',
+    price:160000, priceLabel:'€ 160.000', unit:'fornitura singola', badge:'RARO',
+    desc:'Il pacchetto di ingresso per committenze private esigenti: abitazione monofamiliare, ampliamenti, rustici da riqualificare. Legname strutturale certificato, pavimentazione in massello di castagno, serramenti grezzi in larice e boiserie in ciliegio. Tutto da un\'unica fonte tracciata.',
+    detail:'• 60m³ Abete rosso C24 — travi e arcarecci\n• 18m³ Castagno stagionato — pavimento massello\n• 12m³ Larice — serramenti e persiane grezze\n• 8m³ Ciliegio piallato — boiserie soggiorno\n• 4m³ Frassino — scale interne\n• 3m³ Quercia — soglie e davanzali\n• Consegna con scarico in cantiere\n• Certificati CE e schede di sicurezza\n• Supporto telefonico tecnico 12 mesi',
+    available:true,
+  },
+
+  // ── PACCHETTI RISTORAZIONE ────────────────────────
+  {
+    id:96, name:'Pacchetto Ristorante Essenziale — Mensile', cat:'ristorazione', catLabel:'Pacchetti Ristorazione',
+    price:82000, priceLabel:'€ 82.000', unit:'fornitura mensile', badge:'LUXURY',
+    desc:'Rifornimento mensile per ristoranti di alta cucina con 15–25 coperti. Ingredienti di prima qualità selezionati dalla tenuta: carni frollate, formaggi stagionati, tartufo fresco di stagione, vini in esclusiva e prodotti della terra. Consegna bisettimanale con catena del freddo certificata.',
+    detail:'• 15kg Fassona Piemontese filetto e costata frollata 35gg\n• 8kg Wagyu A4+ — fornitura mensile\n• 5kg Tartufo fresco di stagione (bianco o nero)\n• 10kg Selezione formaggi (Parmigiano 60m, Pecorino tartufo, Caciocavallo Podolico)\n• 20 bottiglie vini selezione (Sagrantino, Barolo, Brunello)\n• 3L Olio EVO Gran Cru — 2 consegne\n• 2kg Funghi porcini o finferli freschi\n• 1kg Miele selezione tenuta\n• 500g Pasta secca artigianale\n• 200g Zafferano purissimo in stimmi\n• 2 bottiglie Aceto Balsamico 25 anni\n• Consegna bisettimanale (2× al mese)\n• Sostituzione gratuita prodotti non conformi\n• Referente dedicato H8–18 lun–sab',
+    available:true,
+  },
+  {
+    id:97, name:'Pacchetto Ristorante Prestige — Mensile', cat:'ristorazione', catLabel:'Pacchetti Ristorazione',
+    price:145000, priceLabel:'€ 145.000', unit:'fornitura mensile', badge:'LUXURY',
+    desc:'Fornitura mensile per ristoranti stellati o bistellati con 30–50 coperti. Volume aumentato, frequenza settimanale e accesso prioritario alle referenze più rare della tenuta: Wagyu A5, tartufo bianco fresco in stagione, caviale, Parmigiano 60 mesi e vini da collezione.',
+    detail:'• 30kg Wagyu A5 Kagoshima — filetto, costata e lingua\n• 20kg Fassona Piemontese vari tagli frollatura 45gg\n• 10kg Tartufo fresco stagionale con certificato peso\n• 5kg Caviale Beluga — 3 consegne mensili\n• 20kg Selezione formaggi (8 tipologie premium)\n• 40 bottiglie vini (Barolo riserva, Brunello, Amarone, Champagne)\n• 6L Olio EVO Gran Cru singola cultivar\n• 4kg Funghi freschi selezione\n• 2kg Miele e confetture rare tenuta\n• 1g Zafferano + 200g Tartufo essiccato laminato\n• 3 bottiglie Aceto Balsamico Tradizionale 25 anni\n• Foie gras d\'anatra — 3kg\n• Consegna settimanale (4× al mese)\n• Accesso priority stock prodotti rari\n• Chef visit: 1 visita in tenuta/anno inclusa',
+    available:true,
+  },
+  {
+    id:98, name:'Pacchetto Ristorante Grand Chef — Mensile', cat:'ristorazione', catLabel:'Pacchetti Ristorazione',
+    price:220000, priceLabel:'€ 220.000', unit:'fornitura mensile', badge:'RARISSIMO',
+    desc:'Il pacchetto per ristoranti tristellati e hotel cinque stelle con produzione giornaliera. Ingredienti al picco assoluto di qualità, consegne trisettimanali, accesso esclusivo alle produzioni limitate della tenuta. Ogni ingrediente accompagnato da scheda tecnica, origine e condizioni di raccolta.',
+    detail:'• 50kg Wagyu A5 certificato con DNA test\n• 30kg Manzo Kobe autentico — importazione diretta Giappone\n• 15kg Tartufo bianco fresco (stagione) / nero pregiato fuori stagione\n• 8kg Caviale Beluga 000 — confezioni da 1kg refrigerate\n• 6kg Foie gras d\'oca extra — etichetta artigianale\n• 30kg Formaggi (10 tipologie, tra cui Strachitunt, Asiago 48m, Parmigiano 60m)\n• 60 bottiglie vini da collezione (DRC, Sassicaia, Masseto, Petrus secondi mercato)\n• 10L Olio EVO Gran Cru 3 cultivar distinte\n• 6kg Funghi freschi (porcini, spugnole, gallinacci, tartufo estivo)\n• 3kg Erbe officinali fresche tenuta\n• Foie gras e patè luxury selection\n• Consegna trisettimanale (3× a settimana)\n• Scheda tecnica e narrazione per ogni ingrediente (menu storytelling)\n• Accesso esclusivo a stock limitati non pubblicati\n• 2 visite in tenuta/anno per lo chef\n• Consulente nutrizionale e food pairing incluso',
+    available:true,
+  },
+  {
+    id:99, name:'Pacchetto Fast Food Premium — Fornitura Mensile', cat:'ristorazione', catLabel:'Pacchetti Ristorazione',
+    price:118000, priceLabel:'€ 118.000', unit:'fornitura mensile', badge:'LUXURY',
+    desc:'Fornitura calibrata per catene fast food di alta gamma (burger gourmet, smash burger di qualità) con 2–4 punti vendita. Carni macinate fresche ogni 48 ore, formaggi fondenti certificati, pane brioche su misura, salse e condimenti artigianali. Tutta la qualità della tenuta nel format quick service.',
+    detail:'• 200kg Fassona Piemontese macinata fresca (aggiornamento 48h)\n• 80kg Wagyu A4 macinato — blend signatura\n• 30kg Cheddar affinato 18 mesi — fette formato burger\n• 20kg Provola affumicata larice — fette formato burger\n• 15kg Pancetta tesa Cinta Senese\n• 10kg Pomodori San Marzano DOP interi pelati\n• 8kg Senape di Digione artigianale\n• 6kg Maionese biologica uova tenuta\n• 5kg Burro chiarificato ghee per grigliatura\n• 4kg Cipolla caramellata al vino rosso\n• 2kg Tartufo nero tritato per salsa signatura\n• Consegna bisettimanale 4× al mese\n• Packaging isotermico certificato\n• Scheda allergeni e valori nutrizionali per ogni referenza',
+    available:true,
+  },
+  {
+    id:100, name:'Pacchetto Elite Omakase — Fornitura Mensile', cat:'ristorazione', catLabel:'Pacchetti Ristorazione',
+    price:450000, priceLabel:'€ 450.000', unit:'fornitura mensile', badge:'RARISSIMO',
+    desc:'La fornitura più esclusiva del listino Terrassaggia, progettata per ristoranti omakase, private dining e chef residenti in dimore di lusso. Tutto il meglio disponibile in tenuta, più selezioni internazionali curate in esclusiva per il cliente. Un unico fornitore per una cucina senza compromessi.',
+    detail:'• 80kg Wagyu A5+ BMS12 — l\'apice della classificazione mondiale\n• 40kg Manzo Kobe DOC — importazione certificata Hyogo Prefecture\n• 30kg Tartufo bianco d\'Alba fresco — tutta la stagione garantita\n• 15kg Caviale Beluga Albino (bianco) — rarità assoluta\n• 10kg Foie gras d\'oca extra + terrina luxury artigianale\n• 6kg Aragosta viva italiana — consegna in acqua\n• 4kg Ricci di mare freschi Sardegna — spedizione giornaliera\n• 50kg Formaggi rari (15 tipologie, inclusi DOP a produzione <30 forme/anno)\n• 100 bottiglie vini da grand cru e grand domaine (DRC, Pétrus, Masseto, Sassicaia)\n• 10 bottiglie distillati rari (whisky tenuta 12 anni, gin botanico, rum aged)\n• 20L Olio EVO Gran Cru monocultivar da 4 cultivar diverse\n• 3g Zafferano purissimo stimmi\n• 500g Tartufo nero liofilizzato in lamelle\n• Erbe fresche personalizzate su indicazione chef\n• Consegna quotidiana (5 giorni su 7, orario concordato)\n• Chef liaison: nostro referente cucina disponibile 7/7\n• Menu consulting trimestrale con chef tenuta\n• 4 visite annuali in tenuta con accesso alle serre\n• Accesso a produzioni uniche non a listino\n• Storytelling ingredienti per menu degustazione',
+    available:true,
+  },
 ];
 
 // ──────────────────────────────────────────────────

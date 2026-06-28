@@ -781,12 +781,16 @@ a { color: inherit; text-decoration: none; }
 .product-card.hidden { display: none; }
 
 .pcard-icon {
-  font-size: 2rem;
   flex-shrink: 0;
   width: 44px; height: 44px;
-  background: #f5f2ec;
+  background: #f0ece3;
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
+  color: var(--green-dark);
+}
+.pcard-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--green-dark);
 }
 .pcard-body { flex: 1; min-width: 0; }
 .pcard-top {
