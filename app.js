@@ -7,6 +7,30 @@
 // ──────────────────────────────────────────────────
 // PRODUCTS DATABASE  (90 prodotti, nessuna foto)
 // ──────────────────────────────────────────────────
+// ──────────────────────────────────────────────────
+// SVG ICON SYSTEM  (nessuna emoji Windows)
+// ──────────────────────────────────────────────────
+const ICONS = {
+  leaf:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>`,
+  cart:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg>`,
+  check:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>`,
+  warning:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+  lock:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+  printer:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`,
+  trash:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>`,
+  list:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
+  doc:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  box:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  money:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
+  clock:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  pin:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  note:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+  calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+  calc:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>`,
+  xmark:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  search:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+};
+
 const CAT_ICONS = {
   legname: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H5l7 7-2 7h4l-2-7 7-7h-3z"/><line x1="12" y1="22" x2="12" y2="16"/></svg>`,
   terra:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 3 6c3 1 6 4 9 6z"/><path d="M12 12C12 7 17 4 21 6c-3 1-6 4-9 6z"/></svg>`,
@@ -620,7 +644,7 @@ function renderProducts(filter = 'all') {
     const card = document.createElement('div');
     card.className = 'product-card product-card--list reveal-up';
     card.style.transitionDelay = `${(i % 20) * 0.04}s`;
-    const icon = CAT_ICONS[p.cat] || '🌿';
+    const icon = CAT_ICONS[p.cat] || ICONS.leaf;
     const luxBadge = ['LUXURY','RARISSIMO','RARO'].includes(p.badge);
     card.innerHTML = `
       <div class="pcard-icon">${icon}</div>
@@ -693,7 +717,7 @@ function openProductDetail(id) {
           ${p.detail.split('|').map(d => `<div style="margin-bottom:0.2rem"><strong>${d.split(':')[0]}:</strong>${d.split(':').slice(1).join(':')}</div>`).join('')}
         </div>
         <button class="btn-primary full-width" onclick="addToCart(${p.id}, null); closeModal('productDetailOverlay')">
-          🛒 Aggiungi al Carrello
+          <span class="btn-svg-icon">${ICONS.cart}</span> Aggiungi al Carrello
         </button>
       </div>
     </div>`;
@@ -716,7 +740,7 @@ function addToCart(id, event) {
   }
 
   updateCartUI();
-  showToast(`✅ ${product.name.split(' ').slice(0,3).join(' ')} aggiunto al carrello`);
+  showToast(`${ICONS.check} ${product.name.split(' ').slice(0,3).join(' ')} aggiunto al carrello`);
 
   // Animate button
   if (event && event.target.closest('.add-to-cart')) {
@@ -740,7 +764,7 @@ function updateCartUI() {
   if (cart.length === 0) {
     itemsEl.innerHTML = `
       <div class="cart-empty">
-        <span>🌿</span>
+        <span class="cart-empty-icon">${ICONS.leaf}</span>
         <p>Il tuo carrello è vuoto</p>
         <small>Aggiungi i nostri prodotti esclusivi</small>
       </div>`;
@@ -751,7 +775,7 @@ function updateCartUI() {
   footerEl.style.display = 'block';
   itemsEl.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.img}" alt="${item.name}" />
+      <div class="cart-item-icon">${CAT_ICONS[item.cat] || ICONS.leaf}</div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">${item.priceLabel}</div>
@@ -856,7 +880,7 @@ function submitOrder(event) {
       .catch(() => {
         // fallback locale
         orders.push(order);
-        showToast("⚠️ Ordine salvato localmente (offline)");
+        showToast("Ordine salvato localmente (offline)");
       });
   } else {
     orders.push(order);
@@ -942,7 +966,7 @@ function renderOrdersTab() {
   document.getElementById('statCompletati').textContent = completed;
 
   if (orders.length === 0) {
-    list.innerHTML = `<div class="no-orders"><span>📋</span><p>Nessun ordine ancora ricevuto</p><small>Gli ordini dei clienti appariranno qui</small></div>`;
+    list.innerHTML = `<div class="no-orders"><span class="no-orders-icon">${ICONS.list}</span><p>Nessun ordine ancora ricevuto</p><small>Gli ordini dei clienti appariranno qui</small></div>`;
     return;
   }
 
@@ -951,19 +975,19 @@ function renderOrdersTab() {
       <div class="order-card-header">
         <div>
           <span class="order-id-badge">${o.id}</span>
-          <span class="order-status status-${o.status}" style="margin-left:0.5rem">${o.status === 'pending' ? '⏳ In Attesa' : '✅ Confermato'}</span>
+          <span class="order-status status-${o.status}" style="margin-left:0.5rem">${o.status === 'pending' ? `<span class="status-svg">${ICONS.clock}</span> In Attesa` : `<span class="status-svg">${ICONS.check}</span> Confermato`}</span>
         </div>
         <span class="order-total">${formatPrice(o.total)}</span>
       </div>
       <div class="order-customer">${o.customer.nome} ${o.customer.cognome}</div>
       <div class="order-email">${o.customer.email} — ${o.customer.tel}</div>
-      <div class="order-email" style="margin-top:0.2rem">📍 ${o.customer.indirizzo}, ${o.customer.cap} ${o.customer.citta}</div>
-      <div class="order-items-preview">📦 ${o.items.map(i => `${i.name} ×${i.qty}`).join(' · ')}</div>
-      ${o.customer.note ? `<div class="order-email" style="margin-top:0.3rem;color:rgba(245,240,232,0.45)">📝 ${o.customer.note}</div>` : ''}
-      <div class="order-date">📅 ${o.date}</div>
+      <div class="order-email" style="margin-top:0.2rem"><span class="icon-inline">${ICONS.pin}</span> ${o.customer.indirizzo}, ${o.customer.cap} ${o.customer.citta}</div>
+      <div class="order-items-preview"><span class="icon-inline">${ICONS.box}</span> ${o.items.map(i => `${i.name} ×${i.qty}`).join(' · ')}</div>
+      ${o.customer.note ? `<div class="order-email" style="margin-top:0.3rem;color:rgba(245,240,232,0.45)"><span class="icon-inline">${ICONS.note}</span> ${o.customer.note}</div>` : ''}
+      <div class="order-date"><span class="icon-inline">${ICONS.calendar}</span> ${o.date}</div>
       <div class="order-actions">
-        ${o.status === 'pending' ? `<button class="btn-confirm-order" onclick="confirmOrder('${o.id}')">✅ Conferma Ordine</button>` : ''}
-        <button class="btn-delete-order" onclick="deleteOrder('${o.id}')">🗑️ Elimina</button>
+        ${o.status === 'pending' ? `<button class="btn-confirm-order" onclick="confirmOrder('${o.id}')"><span class="btn-svg-icon">${ICONS.check}</span> Conferma Ordine</button>` : ''}
+        <button class="btn-delete-order" onclick="deleteOrder('${o.id}')"><span class="btn-svg-icon">${ICONS.trash}</span> Elimina</button>
       </div>
     </div>`).join('');
 }
@@ -1081,7 +1105,7 @@ function printReceipt() {
     .divider{border-top:2px dashed #ccc;margin:0.8rem 0}
     .total{font-weight:bold;font-size:1.1em}
     </style></head><body>
-    <div class="title">🌿 FATTORIA TERRASSAGGIA</div>
+    <div class="title">FATTORIA TERRASSAGGIA</div>
     <div class="title" style="font-size:12px">Vendita dal Vivo — ${new Date().toLocaleString('it-IT')}</div>
     <div class="divider"></div>
     ${liveReceiptItems.map(i => `<div class="line"><span>${i.name.slice(0,30)} ×${i.qty}</span><span>${formatPrice(i.price * i.qty)}</span></div>`).join('')}
@@ -1138,7 +1162,7 @@ function printComanda() {
       tr:nth-child(even) td{background:#faf8f5}
       td:nth-child(5){color:#9a7930;font-weight:bold}
     </style></head><body>
-    <h1>🌿 Fattoria Terrassaggia</h1>
+    <h1>Fattoria Terrassaggia</h1>
     <p>Listino Prezzi — ${new Date().toLocaleDateString('it-IT')} — USO INTERNO</p>
     <table>
       <thead><tr><th>#</th><th>Prodotto</th><th>Categoria</th><th>Unità</th><th>Prezzo</th><th>Disponibilità</th></tr></thead>
@@ -1188,7 +1212,7 @@ function closeModal(id) {
 // ──────────────────────────────────────────────────
 function sendContact(event) {
   event.preventDefault();
-  showToast('✅ Messaggio inviato! Ti risponderemo entro 24 ore.');
+  showToast('Messaggio inviato! Ti risponderemo entro 24 ore.');
   event.target.reset();
 }
 
